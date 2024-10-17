@@ -1,0 +1,23 @@
+services:
+  hd_wallet_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hd_wallet_api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      NODE_ENV: production
+
+  mongo_db:
+    image: mongo:6.0
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
