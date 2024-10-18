@@ -12,18 +12,22 @@ async function getAll(req: Request, res: Response, next: NextFunction) {
 
 async function get(req: Request, res: Response, next: NextFunction) {
     try {
-        res.json(await walletsService.get(parseInt(req.params.id)));
+        res.json(await walletsService.get(req.params.id));
     } catch (err) {
         console.error(`Error while getting the list`, (err as Error).message);
         next(err);
     }
 }
 
-async function create(req: Request, res: Response, next: NextFunction) {
+const create = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.body.externalId) {
+        res.status(400).json({ error: "externalId field is required" });
+        return;
+    }
     try {
         res.json(await walletsService.create(req.body));
     } catch (err) {
-        console.error(`Error while creating the list`, (err as Error).message);
+        console.error(`Error while creating the wallet`, (err as Error).message);
         next(err);
     }
 }
