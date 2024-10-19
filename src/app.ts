@@ -11,6 +11,6 @@ connectDB();
 
 import { wallets } from "./wallets";
 
-app.use("/wallets", wallets);
+app.use("/api/v1/wallets", wallets);
 
 export default app;
