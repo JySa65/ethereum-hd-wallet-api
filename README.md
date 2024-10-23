@@ -1,10 +1,13 @@
 # Ethereum HD Wallet API
 
-## Rest API that manages an Ethereum Herarchical Deterministic Wallet built on ExpressJS.
+## Rest API that manages an Ethereum Herarchical Deterministic Wallet built with TypeScript and ExpressJS.
+
 ### Features:
-* Generate and store addresses from Mnemonic
-* Watch incomming ERC-20 transfers for stored addresses
-* Notify transfers by webhook
+* Generate addresses from an existing Mnemonic Phrases
+* Store generated addresses in a Mongo Collection
+* Monitor incomming ERC-20 token transfers for stored addresses
+
+
 
 
 

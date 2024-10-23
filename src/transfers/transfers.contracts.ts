@@ -30,7 +30,4 @@ const erc20ABI: AbiItem[] = [
     }
 ];
 
-
-const contractAddress = "0xdac17f958d2ee523a2206206994597c13d831ec7"; // USDT Contract Address
-
-export { erc20ABI, contractAddress };
+export { erc20ABI };
