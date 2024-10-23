@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default function connectDB() {
-    const url = "mongodb://mongo_db:27017";
+    const url = "mongodb://mongo_db:27017/hd-wallet";
 
     try {
         mongoose.connect(url);
