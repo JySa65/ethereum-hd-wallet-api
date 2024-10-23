@@ -7,6 +7,19 @@
 * Store generated addresses in a Mongo Collection
 * Monitor incomming ERC-20 token transfers for stored addresses
 
+### Setup project
+
+Fill the environment variables file
+
+```sh
+cp env.example .env
+
+```
+
+Build and run docker containers: MongoDB, ExpressJS API and Mongo Express (Admin)
+```sh
+docker compose up --build
+```
 
 
 

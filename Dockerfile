@@ -1,38 +1,23 @@
-# Stage 1: Build the application
-FROM node:20-alpine AS build
+# Use an official Node.js runtime as a parent image
+FROM node:20-alpine
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
 
-# Install dependencies
+# Install all dependencies (including devDependencies for development)
 RUN npm install
 
-# Copy the entire source code
+# Install typescript globally so you can compile inside the container
+RUN npm install -g typescript
+
+# Copy the entire project to the working directory
 COPY . .
 
-# Build the TypeScript application
-RUN npm run build
-
-# Stage 2: Run the application
-FROM node:20-alpine AS production
-
-# Set the working directory
-WORKDIR /app
-
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install only production dependencies
-RUN npm install --only=production
-
-# Copy built application from the build stage
-COPY --from=build /app/dist ./dist
-
-# Expose the port your Express app listens on (default: 3000)
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "dist/server.js"]
+# Use nodemon to start the app and enable hot-reloading
+CMD ["npx", "nodemon", "--watch", ".", "--exec", "ts-node", "server.ts"]
