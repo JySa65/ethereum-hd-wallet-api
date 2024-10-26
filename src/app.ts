@@ -1,16 +1,27 @@
 import express, { Express, Request, Response } from "express";
 import connectDB from "./config/db";
-import bodyParser from "body-parser";
+import { wallets } from "./wallets";
 
 const app: Express = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Connect to database
 connectDB();
 
-import { wallets } from "./wallets";
-
+// Routes
 app.use("/api/v1/wallets", wallets);
+
+app.get("/", (req: Request, res: Response) => {
+    res.send({msg: "Welcome to the Wallets API"});
+});
+
+
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 export default app;
